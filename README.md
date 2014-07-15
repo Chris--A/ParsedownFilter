@@ -12,6 +12,10 @@ This is handy when you cannot monitor links that people may post on your site.
 
 A knowledge of the inner workings for Parsedown may be required, however I'll update this section soon with 
 a basic instruction set for custom markdown tag filtering.
+
+$tag[ 'name' ]			The name of the tag.
+$tag[ 'text' ]			The text between the opening and closing tags.
+$tag[ 'attributes' ] 	An array containing tag properties to be written.
  
 ```php
 
