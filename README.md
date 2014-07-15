@@ -6,7 +6,8 @@
 
 This class will allow you do define a callback which can intercept each html tag that is output by Parsedown.
 
-### Instantiation of ParsedownFilter. This example will modify any external links 
+### Instantiation of ParsedownFilter. 
+This example will modify any external links 
 to be opened in a new tab and have the `nofollow` attribute applied. 
 This is handy when you cannot monitor links that people may post on your site.
 
@@ -19,7 +20,7 @@ this will be available soon.
 
 
 | Property | Description |
-| :--- | ---: |
+| :--- | :--- |
 | $tag[ 'name' ] | The name of the tag.
 | $tag[ 'text' ] | The text between the opening and closing tags.
 | $tag[ 'attributes' ] | An array containing tag properties to be written.
