@@ -29,7 +29,11 @@
 					if( is_string( $Element[ 'name' ] ) ){
 					
 						$strf = $this->tagCallback;
-						$strf( $Element );
+						$result = $strf( $Element );
+						
+						if( $result === false ){
+							//Remove tag.
+						}
 					}
 				}
 			}
