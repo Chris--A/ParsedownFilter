@@ -53,14 +53,14 @@
 			***/
 			
 			case 'img':
-
+			
 				if( isset( $el[ 'attributes' ][ 'src' ] ) ){
 				
 					//Find formatting tags.
-					parse_str( $el[ 'attributes' ][ 'src' ], $parseResult );
+					parse_str( parse_url( str_replace( '&amp;', '&', $el[ 'attributes' ][ 'src' ] ), PHP_URL_QUERY ), $parseResult );
 					
 					if( is_array( $parseResult ) ){
-					
+
 						CheckImgAttr( $parseResult, $el[ 'attributes' ], 'x', 'width' );
 						CheckImgAttr( $parseResult, $el[ 'attributes' ], 'y', 'height' );
 					}
@@ -69,26 +69,25 @@
 		}
 	}
 	
-	function CheckImgAttr( &$el, &$attr, $id, $tag ){
-	
-		DBG( "Checking attribute" );
+	function CheckImgAttr( array &$el, array &$attr, $id, $tag ){
 	
 		if( isset( $el[ $id ] ) ){
 				
-				DBG( "FOUND attribute" );
-				
 				if( endsWith( $el[ $id ], 'px' ) ){
 				
-					DBG( "MOD attribute" );
-				
 					//Apply attribute and remove suffix.
-					$attr[ $tag ] = substr( $el[ $id ], 0, -2 );
+					$attr[ $tag ] = substr( $el[ $id ], 0, -2 ) . '';
 					
 				}//else if(  ){
 				//getimagesize
 				//}
 		}
 	}
+	
+	
+	/*** 
+		This will be left in until I'm happy with the result.
+	***/
 	
 	function DBG( $str ){
 		echo "<p>$str</p>";
