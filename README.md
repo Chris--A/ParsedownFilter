@@ -47,7 +47,6 @@ This example will modify any external links
 to be opened in a new tab and have the `nofollow` attribute applied. 
 This is handy when you cannot monitor links that people may post on your site.
 
-This is only a basic example, and will cause relative links to be marked `nofollow` also.
  
 ```php
 
@@ -61,8 +60,18 @@ function myFilter( &$el ){
 	switch( $el[ 'name' ] ){
 		case 'a':
 
-			if( strpos( $el[ 'attributes' ][ 'href' ], $_SERVER["SERVER_NAME"] ) === false ){
+			$url = $el[ 'attributes' ][ 'href' ];
 			
+			/***
+				If there is no protocol handler, and the link is not an open protocol address, 
+				the links must be relative so we can return as there is nothing to do.
+			***/
+			
+			if( strpos( $url, '://' ) === false )
+				if( ( ( $url[ 0 ] == '/' ) && ( $url[ 1 ] != '/' ) ) || ( $url[ 0 ] != '/' ) ){ return; }
+					
+		
+			if( strpos( $url, $_SERVER["SERVER_NAME"] ) === false ){
 				$el[ 'attributes' ][ 'rel' ] = 'nofollow';
 				$el[ 'attributes' ][ 'target' ] = '_blank';
 			}
